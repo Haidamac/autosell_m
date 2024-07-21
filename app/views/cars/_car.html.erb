@@ -1,7 +1,17 @@
 <div class="col-auto">
   <div class='card p-0 mt-3 mx-auto shadow-sm'>
     <% if car.images.attached? %>
-      <%= image_tag car.image.variant(:main), alt: car.brand %>
+         <!-- Slick Styles -->
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.css">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick-theme.min.css">
+        <div class="slick-slider">
+          <% car.images.each do |image| %>
+            <div>
+              <%= image_tag image, class: 'img-fluid' %>
+            </div>
+          <% end %>
+        </div>
+      <%# <%= image_tag car.image.variant(:main), alt: car.brand %> %>
     <% else %>
       <%= image_tag("no_image.png", alt: 'No image') %>
     <% end %>

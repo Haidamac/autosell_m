@@ -1,5 +1,5 @@
 class CarsController < ApplicationController
-  before_action :authenticate_user!, only: %i[ create update destroy ]
+  before_action :authenticate_user!, only: %i[ new create update destroy ]
   before_action :set_car, only: %i[ show update destroy ]
   before_action :authorize_admin!, only: %i[update destroy]
 
@@ -12,9 +12,14 @@ class CarsController < ApplicationController
   def show
   end
 
+  def new
+    @car = Car.new
+  end
+
   # POST /cars or /cars.json
   def create
-    @car = Car.new(car_params)
+    # @car = Car.new(car_params)
+    @car = current_user.cars.build(car_params)
 
     respond_to do |format|
       if @car.save
@@ -58,7 +63,7 @@ class CarsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def car_params
-      params.permit(:brand, :car_model, :body, :mileage, :color, :price, :fuel, :year, :volume,
+      params.require(:car).permit(:brand, :car_model, :body, :mileage, :color, :price, :fuel, :year, :volume,
                     :user_id, :status, images: [])
     end
 

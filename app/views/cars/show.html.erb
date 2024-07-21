@@ -2,7 +2,17 @@
   <div class='row g-0'>
     <div class='col-md-4'>
       <% if @car.images.attached?  %>
-        <%= image_tag @car.image.variant(:main), class: 'img-fluid rounded-start', alt: @car.name %>
+        <!-- Slick Styles -->
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.css">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick-theme.min.css">
+        <div class="slick-slider">
+          <% @car.images.each do |image| %>
+            <div>
+              <%= image_tag image, class: 'img-fluid' %>
+            </div>
+          <% end %>
+        </div>
+        <%# <%= image_tag @car.image.variant(:main), class: 'img-fluid rounded-start', alt: @car.brand %> %>
       <% else %>
         <%= image_tag("no_image.png", class: 'card-img-top', alt: 'No Image') %>
       <% end %>
@@ -30,3 +40,17 @@
 
   <%= button_to "Destroy this car", @car, method: :delete %>
 </div>
+
+<!-- Include Slick JS -->
+<script src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+<script>
+  $(document).ready(function(){
+    $('.slick-slider').slick({
+      dots: true,
+      infinite: true,
+      speed: 500,
+      fade: true,
+      cssEase: 'linear'
+    });
+  });
+</script>
