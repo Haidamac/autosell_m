@@ -35,6 +35,9 @@ gem "cssbundling-rails"
 # Build JSON APIs with ease [https://github.com/rails/jbuilder]
 gem "jbuilder"
 
+# Works with Rails out of the box
+gem 'popper_js', '~> 2.11', '>= 2.11.8'
+
 # Use Redis adapter to run Action Cable in production
 gem "redis", ">= 4.0.1"
 

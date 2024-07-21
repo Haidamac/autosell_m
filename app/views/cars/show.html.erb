@@ -2,33 +2,49 @@
   <div class='row g-0'>
     <div class='col-md-4'>
       <% if @car.images.attached?  %>
-        <!-- Slick Styles -->
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.css">
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick-theme.min.css">
-        <div class="slick-slider">
-          <% @car.images.each do |image| %>
-            <div>
-              <%= image_tag image, class: 'img-fluid' %>
-            </div>
-          <% end %>
+        <div class="carousel">
+          <div class="carousel-images">
+            <% @car.images.each_with_index do |image, index| %>
+              <div class="carousel-image <%= 'active' if index == 0 %>">
+                <%= image_tag image.variant(:main), class: 'img-fluid', alt: @car.brand %>
+              </div>
+            <% end %>
+          </div>
+          <button class="prev" onclick="showPrevImage()">Previous</button>
+          <button class="next" onclick="showNextImage()">Next</button>
         </div>
-        <%# <%= image_tag @car.image.variant(:main), class: 'img-fluid rounded-start', alt: @car.brand %> %>
       <% else %>
         <%= image_tag("no_image.png", class: 'card-img-top', alt: 'No Image') %>
       <% end %>
     </div>
     <div class='col-md-8'>
       <div class='card-body'>
-        <h3 class='text-center'><%= @car.brand %></h3>
-        <p class='card-text'><%= @car.car_model %></p>
-        <p class='text-end'><i>Car Body: <%= @car.body %></i></p>
-        <p class='card-text'><h4 style='color:#d63384; text-align:right'>Price: <%= number_to_currency(@car.price) %></h4></p>
-        <%= turbo_frame_tag dom_id(@car) do %>
-            Add
-            <svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='currentColor' class='bi bi-cart4' viewBox='0 0 16 16'>
-              <path d='M0 2.5A.5.5 0 0 1 .5 2H2a.5.5 0 0 1 .485.379L2.89 4H14.5a.5.5 0 0 1 .485.621l-1.5 6A.5.5 0 0 1 13 11H4a.5.5 0 0 1-.485-.379L1.61 3H.5a.5.5 0 0 1-.5-.5zM3.14 5l.5 2H5V5H3.14zM6 5v2h2V5H6zm3 0v2h2V5H9zm3 0v2h1.36l.5-2H12zm1.11 3H12v2h.61l.5-2zM11 8H9v2h2V8zM8 8H6v2h2V8zM5 8H3.89l.5 2H5V8zm0 5a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0zm9-1a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0z'/>
+        <h3 class='text-center'><%= @car.brand %> <%= @car.car_model %></h3>
+        <p class='text-left'>Car Body: <%= @car.body %></p>
+        <p class='text-left'>Mileage: <%= @car.mileage %></p>
+        <p class='text-left'>Color: <%= @car.color %></p>
+        <p class='text-left'>Fuel: <%= @car.fuel %></p>
+        <p class='text-left'>Year: <%= @car.year %></p>
+        <p class='text-left'>Volune: <%= @car.volume %></p>
+        <p class='card-text'>Seller: <%= @car.user_id %></p>
+
+        <p class='card-text'><h4 style='color:#d63384; text-align:right'>Price: <%= number_to_currency(@car.price) %></h4>
+        <div>
+          <%= link_to "tel:+1234567890", class: "phone-call-button" do %>
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-telephone" viewBox="0 0 16 16">
+              <path d="M3.654 1.328a.678.678 0 0 0-1.015-.063L1.605 2.3c-.483.484-.661 1.169-.45 1.77a17.6 17.6 0 0 0 4.168 6.608 17.6 17.6 0 0 0 6.608 4.168c.601.211 1.286.033 1.77-.45l1.034-1.034a.678.678 0 0 0-.063-1.015l-2.307-1.794a.68.68 0 0 0-.58-.122l-2.19.547a1.75 1.75 0 0 1-1.657-.459L5.482 8.062a1.75 1.75 0 0 1-.46-1.657l.548-2.19a.68.68 0 0 0-.122-.58zM1.884.511a1.745 1.745 0 0 1 2.612.163L6.29 2.98c.329.423.445.974.315 1.494l-.547 2.19a.68.68 0 0 0 .178.643l2.457 2.457a.68.68 0 0 0 .644.178l2.189-.547a1.75 1.75 0 0 1 1.494.315l2.306 1.794c.829.645.905 1.87.163 2.611l-1.034 1.034c-.74.74-1.846 1.065-2.877.702a18.6 18.6 0 0 1-7.01-4.42 18.6 18.6 0 0 1-4.42-7.009c-.362-1.03-.037-2.137.703-2.877z"/>
             </svg>
-        <% end %>
+            Call
+          <% end %>
+
+          <%= link_to "tel:+1234567890", class: "phone-call-button" do %>
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-envelope" viewBox="0 0 16 16">
+              <path d="M0 4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2zm2-1a1 1 0 0 0-1 1v.217l7 4.2 7-4.2V4a1 1 0 0 0-1-1zm13 2.383-4.708 2.825L15 11.105zm-.034 6.876-5.64-3.471L8 9.583l-1.326-.795-5.64 3.47A1 1 0 0 0 2 13h12a1 1 0 0 0 .966-.741M1 11.105l4.708-2.897L1 5.383z"/>
+            </svg>
+            Email
+          <% end %>
+          </p>
+        </div>
       </div>
     </div>
   </div>
@@ -41,16 +57,29 @@
   <%= button_to "Destroy this car", @car, method: :delete %>
 </div>
 
-<!-- Include Slick JS -->
-<script src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
 <script>
-  $(document).ready(function(){
-    $('.slick-slider').slick({
-      dots: true,
-      infinite: true,
-      speed: 500,
-      fade: true,
-      cssEase: 'linear'
-    });
+  document.addEventListener('DOMContentLoaded', function() {
+    let currentIndex = 0;
+    const images = document.querySelectorAll('.carousel-image');
+    const totalImages = images.length;
+
+    function showImage(index) {
+      images.forEach((image, i) => {
+        image.classList.toggle('active', i === index);
+      });
+    }
+
+    window.showPrevImage = function() {
+      currentIndex = (currentIndex === 0) ? totalImages - 1 : currentIndex - 1;
+      showImage(currentIndex);
+    };
+
+    window.showNextImage = function() {
+      currentIndex = (currentIndex === totalImages - 1) ? 0 : currentIndex + 1;
+      showImage(currentIndex);
+    };
+
+    // Show the first image initially
+    showImage(currentIndex);
   });
 </script>

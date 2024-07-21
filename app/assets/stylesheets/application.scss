@@ -81,3 +81,11 @@ a:active  {
 .btn-success:hover{
   background-color: limegreen !important;
 }
+
+.carousel-image {
+  display: none;
+}
+
+.carousel-image.active {
+  display: block;
+}

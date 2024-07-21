@@ -6,7 +6,7 @@
 //= require_tree .
 
 import "@hotwired/turbo-rails"
-import "controllers"
-
-import "popper"
+import "./controllers"
 import "bootstrap"
+
+import { createPopper } from '@popperjs/core';
