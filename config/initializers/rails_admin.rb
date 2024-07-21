@@ -30,11 +30,7 @@ RailsAdmin.config do |config|
 
   config.model 'Car' do
     edit do
-      field :status, :enum do
-        enum do
-          Car.statuses.keys.map { |status| [status.humanize, status] }.to_h
-        end
-      end
+      field :status
     end
   end
 
