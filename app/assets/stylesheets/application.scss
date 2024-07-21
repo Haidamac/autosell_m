@@ -1,0 +1,83 @@
+// @import "bootstrap";
+// @import "./products/products";
+
+@import url('https://fonts.googleapis.com/css?family=Roboto:300,400,400i,500');
+
+.nav-layout {
+  width: -webkit-fill-available;
+  z-index: 10000;
+  position: static;
+}
+
+.category {
+  margin-top: 5px;
+}
+
+.row {
+  margin: 3px;
+}
+
+.actions, .field, .login {
+  padding-left: 15px;
+}
+
+a:link, a:visited  {
+  color: slategrey;
+  text-decoration: none;
+}
+
+a:hover  {
+  color: darkred;
+}
+
+a:active  {
+  color: #F00FFF;
+}
+
+#cardnumber {
+  margin: 10px;
+  max-width: 162px;
+}
+
+#expirationdate {
+  margin: 10px;
+}
+
+#expirationmonth {
+  margin-right: 1px;
+  margin-bottom: 15px;
+}
+
+#expirationyear {
+  margin-right: 35px;
+  margin-bottom: 15px;
+}
+
+#securitycode {
+  margin-bottom: 15px;
+  max-width: 40px;
+}
+
+.cart_quantity {
+  color: red;
+}
+
+.quantity {
+  margin: 5px 10px;
+}
+
+.btn-danger{
+  background-color: darkred !important;
+}
+
+.btn-danger:hover{
+  background-color: red !important;
+}
+
+.btn-success{
+  color: white !important;
+}
+
+.btn-success:hover{
+  background-color: limegreen !important;
+}
