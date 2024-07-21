@@ -14,6 +14,12 @@ gem "pg", "~> 1.1"
 # Use the Puma web server [https://github.com/puma/puma]
 gem "puma", ">= 5.0"
 
+# Use JavaScript with ESM import maps [https://github.com/rails/importmap-rails]
+gem 'importmap-rails', '~> 2.0', '>= 2.0.1'
+
+# Integrate SassC-Ruby into Rails
+gem 'sassc-rails', '~> 2.1', '>= 2.1.2'
+
 # Bundle and transpile JavaScript [https://github.com/rails/jsbundling-rails]
 gem "jsbundling-rails"
 
@@ -53,6 +59,9 @@ gem "bootsnap", require: false
 # Use Active Storage variants [https://guides.rubyonrails.org/active_storage_overview.html#transforming-images]
 gem 'image_processing', '~> 1.12', '>= 1.12.2'
 
+# The most popular HTML, CSS, and JavaScript framework for developing responsive
+gem 'bootstrap', '~> 5.3', '>= 5.3.3'
+
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
   gem "debug", platforms: %i[ mri windows ]
@@ -68,5 +77,3 @@ group :development do
   # Speed up commands on slow machines / big apps [https://github.com/rails/spring]
   # gem "spring"
 end
-
-gem "sassc-rails"
