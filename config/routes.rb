@@ -2,6 +2,7 @@ Rails.application.routes.draw do
   devise_for :users, controllers: { sessions: 'users/sessions' }
   mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
   resources :cars
+  resources :my_cars
   resources :users
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 

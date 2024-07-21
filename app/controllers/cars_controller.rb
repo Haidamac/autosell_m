@@ -1,10 +1,11 @@
 class CarsController < ApplicationController
   before_action :authenticate_user!, only: %i[ create update destroy ]
   before_action :set_car, only: %i[ show update destroy ]
+  before_action :authorize_admin!, only: %i[update destroy]
 
   # GET /cars or /cars.json
   def index
-    @cars = Car.all
+    @cars = Car.where(status: 'approved')
   end
 
   # GET /cars/1 or /cars/1.json
@@ -29,7 +30,7 @@ class CarsController < ApplicationController
   # PATCH/PUT /cars/1 or /cars/1.json
   def update
     respond_to do |format|
-      if @car.update(car_params)
+      if @car.update(edit_params)
         format.html { redirect_to car_url(@car), notice: "Car was successfully updated." }
         format.json { render :show, status: :ok, location: @car }
       else
@@ -59,5 +60,13 @@ class CarsController < ApplicationController
     def car_params
       params.permit(:brand, :car_model, :body, :mileage, :color, :price, :fuel, :year, :volume,
                     :user_id, :status, images: [])
+    end
+
+    def edit_params
+      params.permit(:status)
+    end
+
+    def authorize_admin!
+      redirect_to cars_path, alert: "You are not authorized to perform this action." unless current_user.admin?
     end
 end
