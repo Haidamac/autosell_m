@@ -1,16 +1,23 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>AutosellMonolith</title>
+    <title>Auto Sell M</title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
-
     <%= stylesheet_link_tag "application", media: 'all', "data-turbo-track": "reload" %>
     <%= javascript_include_tag "application", "data-turbo-track": "reload", type: "module" %>
   </head>
 
   <body>
-    <%= yield %>
+    <div class='container-fluid vh-100'>
+      <div class='row vh-100'>
+        <%= render partial: 'layouts/template/navbar' %>
+        <div class='col-10 vh-100 p-0'>
+            <%= yield %>
+            <%= render partial: 'layouts/template/flash_message' %>
+        </div>
+      </div>
+    </div>
   </body>
 </html>

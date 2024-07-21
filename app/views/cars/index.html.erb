@@ -1,14 +1,16 @@
-<p style="color: green"><%= notice %></p>
-
-<h1>Cars</h1>
-
-<div id="cars">
-  <% @cars.each do |car| %>
-    <%= render car %>
-    <p>
-      <%= link_to "Show this car", car %>
-    </p>
-  <% end %>
+<div id='viewport'>
+  <!-- Content -->
+  <div id='content'>
+    <div class='container-fluid'>
+      <div id="cars" class="row cars">
+        <div class='row g-5 justify-content-center align-items-center vh-100 flex-wrap'>
+          <% @cars.each do |car| %>
+            <%= render partial: 'cars/car', locals: { car: car } %>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
 
 <%= link_to "New car", new_car_path %>
