@@ -1,14 +1,10 @@
 <p style="color: green"><%= notice %></p>
 
-<h1>Users</h1>
+<%= render current_user %>
 
-<div id="users">
-  <% @users.each do |user| %>
-    <%= render user %>
-    <p>
-      <%= link_to "Show this user", user %>
-    </p>
-  <% end %>
+
+
+<div>
+  <%= button_to "Edit this user", edit_user_path(current_user) %> |
+  <%= button_to "Destroy this user", current_user, method: :delete %>
 </div>
-
-<%= link_to "New user", new_user_path %>
