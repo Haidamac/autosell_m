@@ -82,10 +82,53 @@ a:active  {
   background-color: limegreen !important;
 }
 
+.carousel {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 30px;
+}
+
+.carousel-images {
+  position: relative;
+  width: 100%;
+}
+
 .carousel-image {
   display: none;
 }
 
 .carousel-image.active {
   display: block;
+}
+
+.carousel button {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: rgba(0, 0, 0, 0.5);
+  color: white;
+  border: none;
+  padding: 10px;
+  cursor: pointer;
+  z-index: 100;
+}
+
+.carousel button.prev {
+  left: 10px;
+}
+
+.carousel button.next {
+  right: 10px;
+}
+
+.phone-call-button svg {
+  margin-right: 5px;
+}
+
+.container {
+  display: grid;
+  place-items: center;
+  min-height: 30vh;
 }

@@ -1,7 +1,6 @@
 class CarsController < ApplicationController
-  before_action :authenticate_user!, only: %i[ new create update destroy ]
+  skip_before_action :authenticate_user!, only: %i[ index show ]
   before_action :set_car, only: %i[ show edit update destroy ]
-  # before_action :authorize_admin!, only: %i[update destroy]
 
   # GET /cars or /cars.json
   def index
@@ -44,10 +43,10 @@ class CarsController < ApplicationController
     respond_to do |format|
       if @car.update(car_params)
         format.html { redirect_to car_url(@car), notice: "Car was successfully updated." }
-        # format.json { render :show, status: :ok, location: @car }
+        format.json { render :show, status: :ok, location: @car }
       else
         format.html { render :edit, status: :unprocessable_entity }
-        # format.json { render json: @car.errors, status: :unprocessable_entity }
+        format.json { render json: @car.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -72,8 +71,4 @@ class CarsController < ApplicationController
       params.require(:car).permit(:brand, :car_model, :body, :mileage, :color, :price, :fuel, :year, :volume,
       :user_id, :status, images: [])
     end
-
-    # def authorize_admin!
-    #   redirect_to cars_path, alert: "You are not authorized to perform this action." unless current_user.admin?
-    # end
 end
