@@ -1,5 +1,10 @@
 Rails.application.routes.draw do
   devise_for :users
+
+  devise_scope :user do
+    get 'sign_out', to: 'devise/sessions#destroy', as: :custom_destroy_user_session
+  end
+
   mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
   resources :cars
   resources :my_cars
