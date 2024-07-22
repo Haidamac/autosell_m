@@ -8,7 +8,7 @@ class Car < ApplicationRecord
 
   enum status: %i[pending rejected approved]
 
-  scope :filter_by_status, ->(status) { where(status:) }
+  scope :filter_by_participant, ->(user) { where(user_id: user) }
 
   validates :brand, :car_model, :body, :mileage, :color, :fuel, :year, :volume, presence: true
   validates :price, presence: true, numericality: { greater_than_or_equal_to: 0 }
