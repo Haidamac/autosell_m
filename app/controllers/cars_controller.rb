@@ -1,6 +1,7 @@
 class CarsController < ApplicationController
   skip_before_action :authenticate_user!, only: %i[ index show ]
   before_action :set_car, only: %i[ show edit update destroy ]
+  before_action :authorize_car, only: %i[ edit update destroy ]
 
   # GET /cars or /cars.json
   def index
@@ -53,15 +54,21 @@ class CarsController < ApplicationController
 
   # DELETE /cars/1 or /cars/1.json
   def destroy
-    @car.destroy!
-
-    respond_to do |format|
-      format.html { redirect_to cars_url, notice: "Car was successfully destroyed." }
-      format.json { head :no_content }
-    end
+      @car.destroy!
+      respond_to do |format|
+        format.html { redirect_to cars_url, notice: "Car was successfully destroyed." }
+        format.json { head :no_content }
+      end
   end
 
   private
+
+    def authorize_car
+      unless @car.user_id == current_user.id
+        redirect_to @car, alert: "You are not authorized to perform this action."
+      end
+    end
+
     # Use callbacks to share common setup or constraints between actions.
     def set_car
       @car = Car.find(params[:id])

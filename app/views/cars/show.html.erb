@@ -1,6 +1,6 @@
 <div class='card mb-3 mx-auto' style='max-width: 1200px; margin: auto;'>
   <div class='row g-0'>
-    <div class='col-md-4'>
+    <div class='col-md-8'>
       <% if @car.images.attached? %>
         <div class="carousel">
           <div class="carousel-images">
@@ -17,7 +17,7 @@
         <%= image_tag("no_image.png", class: 'card-img-top', alt: 'No Image') %>
       <% end %>
     </div>
-    <div class='col-md-8'>
+    <div class='col-md-4'>
       <div class='card-body'>
         <h3 class='text-center'><%= @car.brand %> <%= @car.car_model %></h3>
         <p class='text-left'>Car Body: <%= @car.body %></p>
@@ -54,7 +54,7 @@
   <% if @car.user_id == current_user.id %>
     <div class="text-center mt-3">
       <%= link_to "Edit this car", edit_car_path(@car) %> |
-      <%= link_to "Destroy this car", @car, method: :delete, data: { confirm: "Are you sure?" } %> |
+      <%# <%= link_to "Destroy this car", @car, method: :delete %> |
       <%= link_to "Back to cars", cars_path %>
     </div>
   <% else %>
