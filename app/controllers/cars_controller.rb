@@ -22,7 +22,6 @@ class CarsController < ApplicationController
 
   # POST /cars or /cars.json
   def create
-    # @car = Car.new(car_params)
     @car = current_user.cars.build(car_params)
 
     respond_to do |format|
