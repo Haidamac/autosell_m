@@ -6,8 +6,8 @@ class ApplicationController < ActionController::Base
   rescue_from ArgumentError, with: :invalid_argument
 
   def configure_permitted_parameters
-    devise_parameter_sanitizer.permit(:sign_up, keys: [:name, :phone])
-    devise_parameter_sanitizer.permit(:account_update, keys: [:name, :phone])
+    devise_parameter_sanitizer.permit(:sign_up, keys: %i[name phone])
+    devise_parameter_sanitizer.permit(:account_update, keys: %i[name phone])
   end
 
   def record_not_found

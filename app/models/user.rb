@@ -7,6 +7,6 @@ class User < ApplicationRecord
   has_many :cars, dependent: :destroy
 
   def admin?
-    self.admin
+    admin
   end
 end
